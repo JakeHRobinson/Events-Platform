@@ -16,7 +16,7 @@ interface Event {
   title: string;
 }
 
-function AdminScreen() {
+function UserScreen() {
   const [eventData, setEventData] = useState<Event[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -31,7 +31,7 @@ function AdminScreen() {
     <div>loading</div>
   ) : (
     <div>
-      admin
+      User
       <div className="event-grid">
         {eventData.map((singleEvent) => {
           return <EventCard key={singleEvent.id} singleEvent={singleEvent} />;
@@ -41,4 +41,4 @@ function AdminScreen() {
   );
 }
 
-export default AdminScreen;
+export default UserScreen;
