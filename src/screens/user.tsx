@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import supabase from "../utils/supabase";
 import EventCard from "../components/eventCard";
 import "./admin.css";
 import getData from "../utils/eventData";

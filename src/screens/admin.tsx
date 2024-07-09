@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import supabase from "../utils/supabase";
 import EventCard from "../components/eventCard";
 import "./admin.css";
 import getData from "../utils/eventData";
+import NavBar from "../components/navbar";
 
 interface Event {
   created_at: Date;
@@ -27,16 +27,20 @@ function AdminScreen() {
       .then(() => setLoading(false));
   }, []);
 
-  return loading ? (
-    <div>loading</div>
-  ) : (
+  return (
     <div>
-      admin
-      <div className="event-grid">
-        {eventData.map((singleEvent) => {
-          return <EventCard key={singleEvent.id} singleEvent={singleEvent} />;
-        })}
-      </div>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <>
+          <div>Admin</div>
+          <div className="event-grid">
+            {eventData.map((singleEvent) => (
+              <EventCard key={singleEvent.id} singleEvent={singleEvent} />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }

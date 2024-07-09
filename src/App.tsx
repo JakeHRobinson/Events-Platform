@@ -1,17 +1,24 @@
-// import { useEffect, useState } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import "./App.css";
-// import supabase from "./utils/supabase";
 import AdminScreen from "./screens/admin";
-import { Navigate, Route, Routes } from "react-router-dom";
 import UserScreen from "./screens/user";
+import NavBar from "./components/navbar";
 
 function App() {
   return (
-    <Routes>
-      <Route path={"/"} element={<Navigate to={"/admin"} />} />
-      <Route path={"/admin"} element={<AdminScreen />} />
-      <Route path={"/home"} element={<UserScreen/>}/>
-    </Routes>
+    <Router>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Navigate to="/admin" replace />} />
+        <Route path="/admin" element={<AdminScreen />} />
+        <Route path="/home" element={<UserScreen />} />
+      </Routes>
+    </Router>
   );
 }
 
