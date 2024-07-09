@@ -8,6 +8,7 @@ import "./App.css";
 import AdminScreen from "./screens/admin";
 import UserScreen from "./screens/user";
 import NavBar from "./components/navbar";
+import Login from "./components/login";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Navigate to="/admin" replace />} />
         <Route path="/admin" element={<AdminScreen />} />
         <Route path="/home" element={<UserScreen />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );

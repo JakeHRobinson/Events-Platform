@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import EventCard from "../components/eventCard";
 import "./admin.css";
 import getData from "../utils/eventData";
-import NavBar from "../components/navbar";
 
 interface Event {
   created_at: Date;
