@@ -2,25 +2,40 @@ import { useState } from "react";
 import supabase from "../utils/supabase";
 import { Button } from "react-bootstrap";
 import "./signup.css";
-import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [username, setUsername] = useState<string>("");
 
-  async function signInWithEmail(event: React.FormEvent<HTMLFormElement>) {
+  async function signUpWithEmail(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const { error } = await supabase.auth.signInWithPassword({
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.signUp({
       email: email,
       password: password,
+      options: {
+        data: {
+          username: username,
+        },
+      },
     });
 
+    // console.log({ email, password, username });
+    // console.log(event)
+
+    console.log(session);
+
+    setEmail("");
+    setPassword("");
+    setUsername("");
+
     if (error) {
-      alert("That didn't quite work!");
-    } else {
-      navigate("/home");
+      console.log(error);
+    } else if (!session) {
+      console.log("you made it here");
     }
   }
 
@@ -28,7 +43,7 @@ const Signup = () => {
     <form
       className="signup-form"
       onSubmit={(event) => {
-        signInWithEmail(event);
+        signUpWithEmail(event);
       }}
     >
       <label className="login-item">
@@ -53,8 +68,19 @@ const Signup = () => {
           value={password}
         />
       </label>
+      <label className="login-item">
+        Username:
+        <input
+          type="text"
+          name="username"
+          onChange={(event) => {
+            setUsername(event.target.value);
+          }}
+          value={username}
+        />
+      </label>
       <Button type="submit" value="signup">
-        Login
+        Submit
       </Button>
     </form>
   );
