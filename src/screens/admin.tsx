@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import EventCard from "../components/eventCard";
 import "./admin.css";
 import getData from "../utils/eventData";
+import getSession from "../utils/getSession";
+import getUser from "../utils/getUser";
+import { useNavigate } from "react-router-dom";
 
 interface Event {
   created_at: Date;
@@ -16,6 +19,8 @@ interface Event {
 }
 
 function AdminScreen() {
+  const navigate = useNavigate()
+
   const [eventData, setEventData] = useState<Event[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -24,6 +29,18 @@ function AdminScreen() {
     getData()
       .then((data) => setEventData(data))
       .then(() => setLoading(false));
+
+    getSession()
+      .then((session) => {
+        if (session && session.id !== null && session.id !== undefined) {
+          return getUser(session.id);
+        }
+      })
+      .then((user) => {
+        if(user.type !== 'admin'){
+          navigate('/home')
+        }
+      });
   }, []);
 
   return (
