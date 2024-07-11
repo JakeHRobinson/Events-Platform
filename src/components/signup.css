@@ -1,10 +1,19 @@
 .signup-form {
-    width: 100px;
+    width: 200px;
     text-align: left;
+    display: flex;
+    flex-direction: column;
 }
 
 
-.login-item {
+.signup-item {
     display: block;
     padding: 3px
 }
+
+.submit-button {
+    width: auto;
+    align-self: center;
+    margin-top: 5px;
+}
+

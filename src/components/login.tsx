@@ -1,10 +1,10 @@
 import { useState } from "react";
 import supabase from "../utils/supabase";
 import { Button } from "react-bootstrap";
-import "./signup.css";
+import "./login.css";
 import { useNavigate } from "react-router-dom";
 
-const Signup = () => {
+const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -25,7 +25,7 @@ const Signup = () => {
 
   return (
     <form
-      className="signup-form"
+      className="login-form"
       onSubmit={(event) => {
         signInWithEmail(event);
       }}
@@ -52,11 +52,21 @@ const Signup = () => {
           value={password}
         />
       </label>
-      <Button type="submit" value="signup">
-        Login
-      </Button>
+      <div className="bottom-wrapper">
+        <Button type="submit" value="signup" className='custom-btn'>
+          Login
+        </Button>
+        <label
+          className='signup-link'
+          onClick={() => {
+            navigate("/signup");
+          }}
+        >
+          Don't have an account?
+        </label>
+      </div>
     </form>
   );
 };
 
-export default Signup;
+export default Login;

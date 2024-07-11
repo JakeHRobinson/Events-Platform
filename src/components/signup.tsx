@@ -46,7 +46,7 @@ const Signup = () => {
         signUpWithEmail(event);
       }}
     >
-      <label className="login-item">
+      <label className="signup-item">
         Email:
         <input
           type="text"
@@ -57,7 +57,7 @@ const Signup = () => {
           value={email}
         />
       </label>
-      <label className="login-item">
+      <label className="signup-item">
         Password:
         <input
           type="password"
@@ -68,7 +68,7 @@ const Signup = () => {
           value={password}
         />
       </label>
-      <label className="login-item">
+      <label className="signup-item">
         Username:
         <input
           type="text"
@@ -79,7 +79,7 @@ const Signup = () => {
           value={username}
         />
       </label>
-      <Button type="submit" value="signup">
+      <Button type="submit" value="signup" className="submit-button">
         Submit
       </Button>
     </form>

@@ -87,7 +87,7 @@ function NavBar() {
                 session === null ? navigate("/login") : navigate("account");
               }}
             >
-              {session === null ? "login" : "account"}
+              {session === null ? "Login" : "Account"}
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
