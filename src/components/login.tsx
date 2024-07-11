@@ -8,7 +8,6 @@ const Signup = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
 
   async function signInWithEmail(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();

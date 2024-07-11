@@ -9,7 +9,8 @@ import AdminScreen from "./screens/admin";
 import UserScreen from "./screens/user";
 import NavBar from "./components/navbar";
 import Signup from "./components/signup";
-import Login from './components/login'
+import Login from "./components/login";
+import AccountScreen from "./screens/account";
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
         <Route path="/admin" element={<AdminScreen />} />
         <Route path="/home" element={<UserScreen />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path='/login' element={<Login/>}/>
+        <Route path="/login" element={<Login />} />
+        <Route path="/account" element={<AccountScreen/>}/>
       </Routes>
     </Router>
   );
