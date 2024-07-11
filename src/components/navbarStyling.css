@@ -1,0 +1,8 @@
+.navbar-centered {
+    position: fixed !important; 
+    top: 0px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 100%;  
+    z-index: 1030;
+  }

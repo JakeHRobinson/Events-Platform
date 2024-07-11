@@ -5,6 +5,8 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { useNavigate, useLocation } from "react-router-dom";
 import getSession from "../utils/getSession";
+import "./navbarStyling.css";
+import getUser from "../utils/getUser";
 
 interface User {
   email?: string;
@@ -14,24 +16,53 @@ interface User {
   };
 }
 
+interface UserProfile {
+  created_at: Date;
+  email: string;
+  id: number;
+  type: string;
+  username: string;
+  uuid: string;
+}
+
 function NavBar() {
   const [session, setSession] = useState<User | null>(null);
+  const [user, setUser] = useState<UserProfile | null>(null);
   const location = useLocation();
 
   useEffect(() => {
-    getSession().then((session) => {
-      setSession(session);
-    });
+    getSession()
+      .then((session) => {
+        setSession(session);
+        return session;
+      })
+      .then(() => {
+        if (session !== null && session.id !== undefined) {
+          return getUser(session.id);
+        }
+      })
+      .then((user) => {
+        setUser(user);
+      });
   }, [location]);
 
   const navigate = useNavigate();
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className="navbar-centered bg-body-tertiary">
       <Container>
         <Navbar.Brand href="#home">Events</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
+            {user?.type === "admin" && (
+              <Nav.Link
+                onClick={() => {
+                  navigate("/admin");
+                }}
+              >
+                Admin
+              </Nav.Link>
+            )}
             <Nav.Link
               onClick={() => {
                 navigate("/home");
@@ -41,20 +72,8 @@ function NavBar() {
             </Nav.Link>
             <Nav.Link>Link</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item
-                onClick={() => {
-                  navigate("/signup");
-                }}
-              >
-                Signup
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                onClick={() => {
-                  navigate("/login");
-                }}
-              >
-                login
-              </NavDropdown.Item>
+              <NavDropdown.Item>placeholder</NavDropdown.Item>
+              <NavDropdown.Item>placeholder 2</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">

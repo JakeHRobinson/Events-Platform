@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import EventCard from "../components/eventCard";
+import EventCard from "../components/eventCardAdmin";
 import "./admin.css";
 import getData from "../utils/eventData";
 import getSession from "../utils/getSession";
@@ -19,7 +19,7 @@ interface Event {
 }
 
 function AdminScreen() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [eventData, setEventData] = useState<Event[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -37,8 +37,8 @@ function AdminScreen() {
         }
       })
       .then((user) => {
-        if(user.type !== 'admin'){
-          navigate('/home')
+        if (user.type !== "admin") {
+          navigate("/home");
         }
       });
   }, []);
@@ -48,14 +48,11 @@ function AdminScreen() {
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <>
-          <div>Admin</div>
-          <div className="event-grid">
-            {eventData.map((singleEvent) => (
-              <EventCard key={singleEvent.id} singleEvent={singleEvent} />
-            ))}
-          </div>
-        </>
+        <div className="event-grid">
+          {eventData.map((singleEvent) => (
+            <EventCard key={singleEvent.id} singleEvent={singleEvent} />
+          ))}
+        </div>
       )}
     </div>
   );

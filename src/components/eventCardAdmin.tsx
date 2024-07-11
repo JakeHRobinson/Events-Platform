@@ -28,6 +28,10 @@ const EventCard = ({ singleEvent }: EventProps) => {
         <h5 className="card-title">{singleEvent.title}</h5>
         <p className="card-text">{singleEvent.description}</p>
       </div>
+      <div className="button-wrapper">
+        <button className="btn btn-primary">Edit</button>
+        <button className="btn btn-primary">Delete</button>
+      </div>
     </div>
   );
 };

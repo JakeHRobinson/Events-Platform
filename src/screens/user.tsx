@@ -40,7 +40,7 @@ function UserScreen() {
       addUser();
     } else if (error) {
       console.log(error);
-    } 
+    }
   }
 
   async function addUser() {
@@ -77,13 +77,10 @@ function UserScreen() {
   return loading ? (
     <div>loading</div>
   ) : (
-    <div>
-      User
-      <div className="event-grid">
-        {eventData.map((singleEvent) => {
-          return <EventCard key={singleEvent.id} singleEvent={singleEvent} />;
-        })}
-      </div>
+    <div className="event-grid">
+      {eventData.map((singleEvent) => {
+        return <EventCard key={singleEvent.id} singleEvent={singleEvent} />;
+      })}
     </div>
   );
 }
