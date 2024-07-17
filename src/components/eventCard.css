@@ -1,41 +1,47 @@
-.event-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; 
-    width: 300px;
-    height: 420px;
-    border: 1px solid rgb(90, 89, 89);
-    background-color: rgb(243, 239, 239);
-    border-radius: 5px;
-    margin: 5px;
-    margin-top: 10px;
-  }
-
-  .event-card.user{
+.event-card-user{
     display: flex;
     flex-direction: column;
     justify-content: space-between; 
     width: 300px;
     height: 400px;
-    border: 1px solid rgb(90, 89, 89);
-    background-color: rgb(243, 239, 239);
-    border-radius: 5px;
     margin: 5px;
     margin-top: 40px;
+    border-radius: 25px 25px 10px 10px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   }
   
-  .event-card img {
+  .event-card-user img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     max-height: 200px;
+    border-radius: 25px 25px 3px 3px;
+  }
+
+  .event-card-user:hover{
+    cursor: pointer;
+    box-shadow: 0 0 5px rgb(160, 159, 159, 0.5);
+  }
+
+  .card-footer{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    align-items: center;
   }
   
   .card-body {
-    margin: 6px;
-    flex-grow: 1; 
+    margin: 6px; 
   }
   
+  .body-footer-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space;
+    flex-grow: 1;
+    border-radius: 3px 3px 10px 10px;
+  }
+
   .button-wrapper {
     display: flex;
     justify-content: space-between; 

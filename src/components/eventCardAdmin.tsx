@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./eventCard.css";
+import "./eventCardAdmin.css";
 import EditWindow from "./editWindow";
 import { useState } from "react";
 import DeleteWindow from "./deleteWindow";

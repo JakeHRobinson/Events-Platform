@@ -18,15 +18,21 @@ interface EventProps {
 
 const EventCard = ({ singleEvent }: EventProps) => {
   return (
-    <div className="event-card user">
+    <div className="event-card-user">
       <img
         src={singleEvent.image_url}
-        className="card-img-top"
+        className="card-img-top-user"
         alt={singleEvent.title}
       />
-      <div className="card-body">
-        <h5 className="card-title">{singleEvent.title}</h5>
-        <p className="card-text">{singleEvent.description}</p>
+      <div className="body-footer-wrapper">
+        <div className="card-body">
+          <h5 className="card-title">{singleEvent.title}</h5>
+          <p className="card-text">{singleEvent.description}</p>
+        </div>
+        <div className="card-footer">
+          <p>Price: {singleEvent.price}</p>
+          <p>{new Date(singleEvent.date).toLocaleDateString()}</p>
+        </div>
       </div>
     </div>
   );
