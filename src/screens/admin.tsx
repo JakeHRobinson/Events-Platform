@@ -28,7 +28,7 @@ function AdminScreen() {
   const [loading, setLoading] = useState<boolean>(false);
   const [creating, setCreating] = useState<boolean>(false);
 
-  const EventsTable = supabase
+  const EventsListener = supabase
     .channel("custom-all-channel")
     .on(
       "postgres_changes",

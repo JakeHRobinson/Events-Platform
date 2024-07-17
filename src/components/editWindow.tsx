@@ -35,8 +35,6 @@ function EditWindow({ setEditing, singleEvent }: EventProps) {
   const [editTimeEnd, setEditTimeEnd] = useState<string>(singleEvent.time_end);
   const [editImgURL, setEditImgURL] = useState<string>(singleEvent.image_url);
 
-  console.log(singleEvent.id);
-
   const handleOptionChange = (event?: React.FormEvent<HTMLSelectElement>) => {
     if (!event) return;
     const target = event.target as HTMLInputElement;
@@ -125,7 +123,7 @@ function EditWindow({ setEditing, singleEvent }: EventProps) {
             <FloatingLabel controlId="customAmount" label="Price (£)">
               <Form.Control
                 type="number"
-                defaultValue={Number(
+                defaultValue={isNaN(Number(singleEvent.price))? '' : Number(
                   singleEvent.price.slice(1, singleEvent.price.length)
                 )}
                 onChange={(event) => {
