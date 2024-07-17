@@ -14,6 +14,8 @@ function DeleteWindow({ setDeleting, eventId }: DeleteWindowProps) {
     if(error){
         console.log(error, '<----- error')
         alert("That didn't quite work, please try again in a few moments")
+    } else {
+        setDeleting(false)
     }
   };
 

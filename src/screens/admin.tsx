@@ -7,6 +7,7 @@ import getUser from "../utils/getUser";
 import { useNavigate } from "react-router-dom";
 import supabase from "../utils/supabase";
 import { Button } from "react-bootstrap";
+import CreateWindow from "../components/createListing";
 
 interface Event {
   created_at: Date;
@@ -25,6 +26,7 @@ function AdminScreen() {
 
   const [eventData, setEventData] = useState<Event[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [creating, setCreating] = useState<boolean>(false);
 
   const EventsTable = supabase
     .channel("custom-all-channel")
@@ -61,18 +63,27 @@ function AdminScreen() {
 
   return (
     <div>
-      <Button className="btn-primary" style={{marginTop: '35px'}}>Create Listing</Button>
+      <Button
+        className="btn-primary"
+        style={{ marginTop: "35px" }}
+        onClick={() => {
+          setCreating(true);
+        }}
+      >
+        Create Listing
+      </Button>
       <div>
         {loading ? (
           <div>Loading...</div>
         ) : (
-          <div className='event-grid'>
+          <div className="event-grid">
             {eventData.map((singleEvent) => (
-              <EventCard key={singleEvent.id} singleEvent={singleEvent}/>
+              <EventCard key={singleEvent.id} singleEvent={singleEvent} />
             ))}
           </div>
         )}
       </div>
+      {creating && <CreateWindow setCreating={setCreating} />}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, FloatingLabel } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import supabase from "../utils/supabase";
-import './editWindow.css'
+import "./editWindow.css";
 
 interface EventProps {
   setEditing: Function;
@@ -35,7 +35,7 @@ function EditWindow({ setEditing, singleEvent }: EventProps) {
   const [editTimeEnd, setEditTimeEnd] = useState<string>(singleEvent.time_end);
   const [editImgURL, setEditImgURL] = useState<string>(singleEvent.image_url);
 
-  console.log(singleEvent.id)
+  console.log(singleEvent.id);
 
   const handleOptionChange = (event?: React.FormEvent<HTMLSelectElement>) => {
     if (!event) return;
@@ -47,7 +47,7 @@ function EditWindow({ setEditing, singleEvent }: EventProps) {
       setEditPrice("Free");
       setShowCustomAmount(false);
     } else if (target.value === "payAsYouWish") {
-      setEditPrice("Pay as You Wish");
+      setEditPrice("Optional Donation");
       setShowCustomAmount(false);
     } else {
       setShowCustomAmount(false);
@@ -55,13 +55,19 @@ function EditWindow({ setEditing, singleEvent }: EventProps) {
   };
 
   const submitHandler = async () => {
+    let finalPrice = "";
+    if (isNaN(Number(editPrice))) {
+      finalPrice = editPrice;
+    } else {
+      finalPrice = "£" + editPrice;
+    }
     const { error } = await supabase
       .from("Events")
       .update([
         {
           title: editTitle,
           description: editDescription,
-          price: editPrice,
+          price: finalPrice,
           time_start: editTimeStart,
           time_end: editTimeEnd,
           date: editDate,
@@ -80,7 +86,7 @@ function EditWindow({ setEditing, singleEvent }: EventProps) {
 
   return (
     <>
-      <div className="popup-card-container" >
+      <div className="popup-card-container">
         <div>
           <FloatingLabel controlId="editTitle" label="Title" className="mb-3">
             <Form.Control
@@ -111,17 +117,19 @@ function EditWindow({ setEditing, singleEvent }: EventProps) {
             >
               <option value="">Select Payment Method</option>
               <option value="free">Free</option>
-              <option value="payAsYouWish">Pay as you wish</option>
+              <option value="payAsYouWish">Optional Donation</option>
               <option value="setAmount">Set Amount</option>
             </Form.Select>
           </FloatingLabel>
           {showCustomAmount && (
-            <FloatingLabel controlId="customAmount" label="Price">
+            <FloatingLabel controlId="customAmount" label="Price (£)">
               <Form.Control
-                type="text"
-                defaultValue={singleEvent.price}
+                type="number"
+                defaultValue={Number(
+                  singleEvent.price.slice(1, singleEvent.price.length)
+                )}
                 onChange={(event) => {
-                  setEditPrice(event.target.value);
+                  setEditPrice(event.target.value.toString());
                 }}
               />
             </FloatingLabel>

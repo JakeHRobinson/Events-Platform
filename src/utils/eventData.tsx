@@ -4,12 +4,15 @@ async function getData() {
   const { data, error } = await supabase
     .from("Events")
     .select("*")
-    .order("id", { ascending: true });
+    .order("date", { ascending: true });
 
   if (error) {
     console.log(error);
   }
-  return data || [];
+
+  const futureEvents = data?.filter(event => new Date(event.date) >= new Date()) || [];
+  
+  return futureEvents;
 }
 
 export default getData;
