@@ -12,8 +12,8 @@ interface Event {
   id: number;
   image_url: string;
   price: string;
-  time_end: Date;
-  time_start: Date;
+  time_end: string;
+  time_start: string;
   title: string;
 }
 

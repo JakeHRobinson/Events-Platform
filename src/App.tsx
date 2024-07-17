@@ -11,6 +11,7 @@ import NavBar from "./components/navbar";
 import Signup from "./components/signup";
 import Login from "./components/login";
 import AccountScreen from "./screens/account";
+import EventScreen from "./screens/eventScreen";
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
         <Route path="/home" element={<UserScreen />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/account" element={<AccountScreen/>}/>
+        <Route path="/account" element={<AccountScreen />} />
+        <Route path="/event/:id" element={<EventScreen />} />
       </Routes>
     </Router>
   );

@@ -5,7 +5,7 @@
     width: 300px;
     height: 400px;
     margin: 5px;
-    margin-top: 40px;
+    margin-top: 100px;
     border-radius: 25px 25px 10px 10px;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   }
@@ -28,6 +28,7 @@
     justify-content: space-between;
     padding: 0 10px;
     align-items: center;
+    font-weight: bold;
   }
   
   .card-body {
@@ -40,6 +41,7 @@
     justify-content: space;
     flex-grow: 1;
     border-radius: 3px 3px 10px 10px;
+    margin-top: 5px;
   }
 
   .button-wrapper {
