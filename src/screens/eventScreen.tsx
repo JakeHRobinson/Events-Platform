@@ -22,10 +22,12 @@ function EventScreen() {
   let { id } = useParams();
 
   useEffect(() => {
+    setLoading(true);
     if (id) {
       singleEventData(id).then((data) => {
         if (data) {
           setEvent(data[0]);
+          setLoading(false);
         }
       });
     }
