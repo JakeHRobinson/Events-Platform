@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./eventCard.css";
 import EditWindow from "./editWindow";
 import { useState } from "react";
+import DeleteWindow from "./deleteWindow";
 
 interface EventProps {
   key: number;
@@ -20,6 +21,7 @@ interface EventProps {
 
 const EventCard = ({ singleEvent }: EventProps) => {
   const [editing, setEditing] = useState<boolean>(false);
+  const [deleting, setDeleting] = useState<boolean>(false);
   return (
     <>
       <div className="event-card">
@@ -41,12 +43,20 @@ const EventCard = ({ singleEvent }: EventProps) => {
           >
             Edit
           </button>
-          <button className="btn btn-primary">Delete</button>
+          <button
+            className="btn btn-primary"
+            onClick={() => {
+              setDeleting(true);
+            }}
+          >
+            Delete
+          </button>
         </div>
       </div>
-      {editing === true && (
+      {editing && (
         <EditWindow setEditing={setEditing} singleEvent={singleEvent} />
       )}
+      {deleting && <DeleteWindow setDeleting={setDeleting} eventId={singleEvent.id}/>}
     </>
   );
 };

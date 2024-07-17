@@ -18,7 +18,7 @@ interface EventProps {
 
 const EventCard = ({ singleEvent }: EventProps) => {
   return (
-    <div className="event-card">
+    <div className="event-card user">
       <img
         src={singleEvent.image_url}
         className="card-img-top"

@@ -6,6 +6,7 @@ import getSession from "../utils/getSession";
 import getUser from "../utils/getUser";
 import { useNavigate } from "react-router-dom";
 import supabase from "../utils/supabase";
+import { Button } from "react-bootstrap";
 
 interface Event {
   created_at: Date;
@@ -60,15 +61,18 @@ function AdminScreen() {
 
   return (
     <div>
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <div className='event-grid'>
-          {eventData.map((singleEvent) => (
-            <EventCard key={singleEvent.id} singleEvent={singleEvent}/>
-          ))}
-        </div>
-      )}
+      <Button className="btn-primary" style={{marginTop: '35px'}}>Create Listing</Button>
+      <div>
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
+          <div className='event-grid'>
+            {eventData.map((singleEvent) => (
+              <EventCard key={singleEvent.id} singleEvent={singleEvent}/>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
