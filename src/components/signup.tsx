@@ -2,11 +2,14 @@ import { useState } from "react";
 import supabase from "../utils/supabase";
 import { Button } from "react-bootstrap";
 import "./signup.css";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [username, setUsername] = useState<string>("");
+
+  const navigate = useNavigate();
 
   async function signUpWithEmail(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -33,7 +36,8 @@ const Signup = () => {
     setUsername("");
 
     if (error) {
-      console.log(error);
+      alert(error.message)
+      return error;
     } else if (!session) {
       console.log("you made it here");
     }
@@ -43,7 +47,12 @@ const Signup = () => {
     <form
       className="signup-form"
       onSubmit={(event) => {
-        signUpWithEmail(event);
+        signUpWithEmail(event).then((error) => {
+          if (!error) {
+            alert("Please check your email for a verification link");
+            navigate("/login");
+          }
+        });
       }}
     >
       <label className="signup-item">

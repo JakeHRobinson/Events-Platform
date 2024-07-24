@@ -3,6 +3,7 @@ import supabase from "../utils/supabase";
 import { Button } from "react-bootstrap";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
+import getUser from "../utils/getUser";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ const Login = () => {
 
   async function signInWithEmail(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
     });
@@ -19,7 +20,7 @@ const Login = () => {
     if (error) {
       alert("That didn't quite work!");
     } else {
-      navigate("/home");
+      return data.user.id;
     }
   }
 
@@ -27,7 +28,21 @@ const Login = () => {
     <form
       className="login-form"
       onSubmit={(event) => {
-        signInWithEmail(event);
+        signInWithEmail(event)
+          .then((id) => {
+            if (id) {
+              return getUser(id);
+            }
+          })
+          .then((user) => {
+            if (user) {
+              if (user.type === "admin") {
+                navigate("/admin");
+              } else {
+                navigate("/home");
+              }
+            }
+          });
       }}
     >
       <label className="login-item">
@@ -53,11 +68,11 @@ const Login = () => {
         />
       </label>
       <div className="bottom-wrapper">
-        <Button type="submit" value="signup" className='custom-btn'>
+        <Button type="submit" value="signup" className="custom-btn">
           Login
         </Button>
         <label
-          className='signup-link'
+          className="signup-link"
           onClick={() => {
             navigate("/signup");
           }}
