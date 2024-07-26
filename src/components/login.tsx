@@ -3,10 +3,10 @@ import { Button } from "react-bootstrap";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
 import getUser from "../utils/getUser";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import supabase from '../utils/supabase'
 
 const Login = () => {
-  const supabase = useSupabaseClient();
+
 
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
@@ -96,7 +96,7 @@ const Login = () => {
           Don't have an account?
         </label>
       </div>
-      <Button onClick={signInWithGoogle}>Sign in with Google</Button>
+      {/* <Button onClick={signInWithGoogle}>Sign in with Google</Button> */}
     </form>
   );
 };

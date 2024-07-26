@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap";
 import "./deleteWindow.css";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import supabase from "../utils/supabase";
 
 type DeleteWindowProps = {
   setDeleting: Function;
@@ -8,16 +8,14 @@ type DeleteWindowProps = {
 };
 
 function DeleteWindow({ setDeleting, eventId }: DeleteWindowProps) {
-  const supabase = useSupabaseClient();
-
   const deleteHandler = async () => {
     const { error } = await supabase.from("Events").delete().eq("id", eventId);
 
-    if(error){
-        console.log(error, '<----- error')
-        alert("That didn't quite work, please try again in a few moments")
+    if (error) {
+      console.log(error, "<----- error");
+      alert("That didn't quite work, please try again in a few moments");
     } else {
-        setDeleting(false)
+      setDeleting(false);
     }
   };
 

@@ -2,15 +2,13 @@ import { useState } from "react";
 import { Button, FloatingLabel } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import "./editWindow.css";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import supabase from "../utils/supabase";
 
 type createWindowProps = {
   setCreating: Function;
 };
 
 function CreateWindow({ setCreating }: createWindowProps) {
-  const supabase = useSupabaseClient();
-
   const [selectedOption, setSelectedOption] = useState<string>("");
   const [showCustomAmount, setShowCustomAmount] = useState<boolean>(false);
 

@@ -4,7 +4,7 @@ import getUser from "../utils/getUser";
 import Card from "react-bootstrap/Card";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import supabase from "../utils/supabase"
 
 interface UserProfile {
   created_at: Date;
@@ -16,7 +16,7 @@ interface UserProfile {
 }
 
 function AccountScreen() {
-  const supabase = useSupabaseClient();
+  
 
   const [user, setUser] = useState<UserProfile | null>(null);
   const navigate = useNavigate();

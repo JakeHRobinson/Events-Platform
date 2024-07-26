@@ -7,7 +7,7 @@ import getUser from "../utils/getUser";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import CreateWindow from "../components/createListing";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import supabase from "../utils/supabase"
 
 interface Event {
   created_at: Date;
@@ -23,7 +23,7 @@ interface Event {
 
 function AdminScreen() {
   const navigate = useNavigate();
-  const supabase = useSupabaseClient();
+
 
   const [eventData, setEventData] = useState<Event[]>([]);
   const [loading, setLoading] = useState<boolean>(false);

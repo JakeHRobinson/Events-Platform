@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, FloatingLabel } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import "./editWindow.css";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import supabase from "../utils/supabase";
 
 interface EventProps {
   setEditing: Function;
@@ -20,8 +20,6 @@ interface EventProps {
 }
 
 function EditWindow({ setEditing, singleEvent }: EventProps) {
-  const supabase = useSupabaseClient();
-
   const [selectedOption, setSelectedOption] = useState<string>("");
   const [showCustomAmount, setShowCustomAmount] = useState<boolean>(false);
 
@@ -125,9 +123,13 @@ function EditWindow({ setEditing, singleEvent }: EventProps) {
             <FloatingLabel controlId="customAmount" label="Price (£)">
               <Form.Control
                 type="number"
-                defaultValue={isNaN(Number(singleEvent.price))? '' : Number(
-                  singleEvent.price.slice(1, singleEvent.price.length)
-                )}
+                defaultValue={
+                  isNaN(Number(singleEvent.price))
+                    ? ""
+                    : Number(
+                        singleEvent.price.slice(1, singleEvent.price.length)
+                      )
+                }
                 onChange={(event) => {
                   setEditPrice(event.target.value.toString());
                 }}

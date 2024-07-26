@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import EventCard from "../components/eventCard";
 import "./admin.css";
 import getData from "../utils/eventData";
-// import supabase from "../utils/supabase";
+import supabase from "../utils/supabase";
 import getSession from "../utils/getSession";
-import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useSession } from "@supabase/auth-helpers-react";
 
 interface Event {
   created_at: Date;
@@ -27,8 +27,7 @@ interface User {
 }
 
 function UserScreen() {
-  const supabase = useSupabaseClient();
-  
+
   const [eventData, setEventData] = useState<Event[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [currSession, setCurrSession] = useState<User | null>(null);
