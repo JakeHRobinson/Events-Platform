@@ -4,8 +4,6 @@ import "./admin.css";
 import getData from "../utils/eventData";
 import supabase from "../utils/supabase";
 import getSession from "../utils/getSession";
-import { useSession } from "@supabase/auth-helpers-react";
-
 
 interface Event {
   created_at: Date;
@@ -31,7 +29,6 @@ function UserScreen() {
   const [eventData, setEventData] = useState<Event[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [currSession, setCurrSession] = useState<User | null>(null);
-  const [authUser, setAuthUser] = useState<boolean>(false);
 
   async function databaseCheck() {
     const { data, error } = await supabase
@@ -61,62 +58,21 @@ function UserScreen() {
     }
   }
 
-  // useEffect(() => {
-  //   const getAuthSession = async () => {
-  //     const{data, error} = await supabase.auth.getSession()
-
-  //     if(data){
-  //       console.log(data)
-  //     } else if (error) {
-  //       console.log(error)
-  //     }
-  //   }
-
-  //   getAuthSession()
-  // }, [window.location.href])
-
   useEffect(() => {
     setLoading(true);
     getData()
       .then((data) => setEventData(data))
       .then(() => setLoading(false));
-    getSession().then((userSession) => {
-      if (!userSession) {
-        setAuthUser(true);
-      } else {
-        setCurrSession(userSession)
-      }
+    getSession().then((session) => {
+      setCurrSession(session);
     });
   }, []);
-
-  // useEffect(() => {
-  //   const getAuthUser = async () => {
-  //     const { data: user, error } = await supabase.auth.getUser();
-
-  //     if (error) {
-  //       console.log(error);
-  //     }
-
-  //     console.log(user);
-  //   };
-
-  //   getAuthUser();
-  // }, [authUser]);
 
   useEffect(() => {
     if (currSession !== null) {
       databaseCheck();
     }
   }, [currSession]);
-
-
-  // supabase.auth.onAuthStateChange((_event, session) => {
-  //   if(session){
-  //     console.log("user is signed in:", session)
-  //   } else {
-  //     console.log("no active google auth session")
-  //   } 
-  // })
 
   return loading ? (
     <div>loading</div>
