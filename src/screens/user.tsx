@@ -4,6 +4,8 @@ import "./admin.css";
 import getData from "../utils/eventData";
 import supabase from "../utils/supabase";
 import getSession from "../utils/getSession";
+import { useSession } from "@supabase/auth-helpers-react";
+
 
 interface Event {
   created_at: Date;
@@ -59,6 +61,20 @@ function UserScreen() {
     }
   }
 
+  // useEffect(() => {
+  //   const getAuthSession = async () => {
+  //     const{data, error} = await supabase.auth.getSession()
+
+  //     if(data){
+  //       console.log(data)
+  //     } else if (error) {
+  //       console.log(error)
+  //     }
+  //   }
+
+  //   getAuthSession()
+  // }, [window.location.href])
+
   useEffect(() => {
     setLoading(true);
     getData()
@@ -94,13 +110,13 @@ function UserScreen() {
   }, [currSession]);
 
 
-  supabase.auth.onAuthStateChange((_event, session) => {
-    if(session){
-      console.log("user is signed in:", session)
-    } else {
-      console.log("no active google auth session")
-    }
-  })
+  // supabase.auth.onAuthStateChange((_event, session) => {
+  //   if(session){
+  //     console.log("user is signed in:", session)
+  //   } else {
+  //     console.log("no active google auth session")
+  //   } 
+  // })
 
   return loading ? (
     <div>loading</div>

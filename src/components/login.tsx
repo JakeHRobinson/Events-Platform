@@ -28,7 +28,12 @@ const Login = () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        scopes: 'openid profile email https://www.googleapis.com/auth/calendar'
+        scopes: 'https://www.googleapis.com/auth/calendar', 
+        redirectTo: 'http://localhost:5173/home',
+        queryParams: {
+          access_type: 'offline', 
+          prompt: 'consent'
+        }
       },
     });
 
@@ -36,10 +41,6 @@ const Login = () => {
       alert("There was an error loging in with Google");
       console.log(error);
     }
-
-    supabase.auth.onAuthStateChange((_event, session) => {
-      console.log('Updated session:', session)
-    })
   }
 
   return (
