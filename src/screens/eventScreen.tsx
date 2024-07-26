@@ -8,6 +8,7 @@ import supabase from "../utils/supabase";
 import getSession from "../utils/getSession";
 import getUser from "../utils/getUser";
 
+
 interface SingleEvent {
   created_at: Date;
   date: Date;
@@ -150,7 +151,7 @@ function EventScreen() {
               Sign up and pay
             </Button>
           ) : (
-            <Button>Sign up</Button>
+            <Button onClick={() => {console.log(window.location.href)}}>Sign up</Button>
           )}
         </div>
       </div>

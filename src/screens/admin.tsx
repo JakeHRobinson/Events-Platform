@@ -5,9 +5,9 @@ import getData from "../utils/eventData";
 import getSession from "../utils/getSession";
 import getUser from "../utils/getUser";
 import { useNavigate } from "react-router-dom";
-import supabase from "../utils/supabase";
 import { Button } from "react-bootstrap";
 import CreateWindow from "../components/createListing";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 interface Event {
   created_at: Date;
@@ -23,11 +23,14 @@ interface Event {
 
 function AdminScreen() {
   const navigate = useNavigate();
+  const supabase = useSupabaseClient();
 
   const [eventData, setEventData] = useState<Event[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [creating, setCreating] = useState<boolean>(false);
 
+
+  //@ts-ignore: Unused variable, but needed for db table listener
   const EventsListener = supabase
     .channel("custom-all-channel")
     .on(
@@ -55,7 +58,7 @@ function AdminScreen() {
         }
       })
       .then((user) => {
-        if (user.type !== "admin") {
+        if (user === undefined || user.type !== "admin") {
           navigate("/home");
         }
       });

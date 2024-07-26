@@ -1,10 +1,11 @@
 import { useState } from "react";
-import supabase from "../utils/supabase";
 import { Button } from "react-bootstrap";
 import "./signup.css";
 import { useNavigate } from "react-router-dom";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const Signup = () => {
+  const supabase = useSupabaseClient();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [username, setUsername] = useState<string>("");

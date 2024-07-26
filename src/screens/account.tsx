@@ -3,8 +3,8 @@ import getSession from "../utils/getSession";
 import getUser from "../utils/getUser";
 import Card from "react-bootstrap/Card";
 import { Button } from "react-bootstrap";
-import supabase from "../utils/supabase";
 import { useNavigate } from "react-router-dom";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 interface UserProfile {
   created_at: Date;
@@ -16,6 +16,8 @@ interface UserProfile {
 }
 
 function AccountScreen() {
+  const supabase = useSupabaseClient();
+
   const [user, setUser] = useState<UserProfile | null>(null);
   const navigate = useNavigate();
 

@@ -1,11 +1,13 @@
 import { useState } from "react";
-import supabase from "../utils/supabase";
 import { Button } from "react-bootstrap";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
 import getUser from "../utils/getUser";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const Login = () => {
+  const supabase = useSupabaseClient();
+
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -21,6 +23,20 @@ const Login = () => {
       alert("That didn't quite work!");
     } else {
       return data.user.id;
+    }
+  }
+
+  async function signInWithGoogle() {
+    const {data, error} = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        scopes: 'https://www.googleapis.com/auth/calendar'
+      }
+    })
+
+    if(error){
+      alert("There was an error loging in with Google")
+      console.log(error)
     }
   }
 
@@ -80,6 +96,7 @@ const Login = () => {
           Don't have an account?
         </label>
       </div>
+      <Button onClick={signInWithGoogle}>Sign in with Google</Button>
     </form>
   );
 };

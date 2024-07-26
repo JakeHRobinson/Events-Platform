@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Button, FloatingLabel } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import supabase from "../utils/supabase";
 import "./editWindow.css";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
 interface EventProps {
   setEditing: Function;
@@ -20,6 +20,8 @@ interface EventProps {
 }
 
 function EditWindow({ setEditing, singleEvent }: EventProps) {
+  const supabase = useSupabaseClient();
+
   const [selectedOption, setSelectedOption] = useState<string>("");
   const [showCustomAmount, setShowCustomAmount] = useState<boolean>(false);
 

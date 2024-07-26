@@ -32,13 +32,10 @@ function NavBar() {
 
   useEffect(() => {
     getSession()
-      .then((session) => {
-        setSession(session);
-        return session;
-      })
-      .then(() => {
-        if (session !== null && session.id !== undefined) {
-          return getUser(session.id);
+      .then((userSession) => {
+        setSession(userSession);
+        if (userSession !== null && userSession.id !== undefined) {
+          return getUser(userSession.id);
         }
       })
       .then((user) => {
