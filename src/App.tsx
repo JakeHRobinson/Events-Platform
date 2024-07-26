@@ -13,12 +13,8 @@ import Login from "./components/login";
 import AccountScreen from "./screens/account";
 import EventScreen from "./screens/eventScreen";
 import PaymentScreen from "./screens/paymentScreen";
-import { useSession } from "@supabase/auth-helpers-react";
 
 function App() {
-  const session = useSession()
-  
-  
   return (
     <Router>
       <NavBar />

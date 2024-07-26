@@ -3,11 +3,9 @@ import { Button } from "react-bootstrap";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
 import getUser from "../utils/getUser";
-import supabase from '../utils/supabase'
+import supabase from "../utils/supabase";
 
 const Login = () => {
-
-
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -27,17 +25,21 @@ const Login = () => {
   }
 
   async function signInWithGoogle() {
-    const {data, error} = await supabase.auth.signInWithOAuth({
-      provider: 'google',
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
       options: {
-        scopes: 'https://www.googleapis.com/auth/calendar'
-      }
-    })
+        scopes: 'openid profile email https://www.googleapis.com/auth/calendar'
+      },
+    });
 
-    if(error){
-      alert("There was an error loging in with Google")
-      console.log(error)
+    if (error) {
+      alert("There was an error loging in with Google");
+      console.log(error);
     }
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      console.log('Updated session:', session)
+    })
   }
 
   return (
@@ -96,7 +98,7 @@ const Login = () => {
           Don't have an account?
         </label>
       </div>
-      {/* <Button onClick={signInWithGoogle}>Sign in with Google</Button> */}
+      <Button onClick={signInWithGoogle}>Sign in with Google</Button>
     </form>
   );
 };

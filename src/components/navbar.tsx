@@ -26,6 +26,7 @@ interface UserProfile {
 }
 
 function NavBar() {
+
   const [session, setSession] = useState<User | null>(null);
   const [user, setUser] = useState<UserProfile | null>(null);
   const location = useLocation();
