@@ -10,6 +10,8 @@ const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const redirect = import.meta.env.VITE_ENVIRONMENT === 'development' ? 'http://localhost:5173' : 'https://business-events-platform.netlify.app'
+
   async function signInWithEmail(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -29,7 +31,7 @@ const Login = () => {
       provider: "google",
       options: {
         scopes: 'https://www.googleapis.com/auth/calendar', 
-        redirectTo: 'http://localhost:5173/home',
+        redirectTo: redirect,
         queryParams: {
           access_type: 'offline', 
           prompt: 'consent'
