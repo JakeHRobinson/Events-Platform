@@ -7,11 +7,6 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 const Login = () => {
   const navigate = useNavigate();
 
-  //  const redirect =
-  //   import.meta.env.VITE_ENVIRONMENT === "development"
-  //     ? "http://localhost:5173"
-  //     : "https://business-events-platform.netlify.app";
-
   supabase.auth.onAuthStateChange(async (event) => {
     if (event === "SIGNED_IN") {
       navigate("/");
@@ -24,7 +19,6 @@ const Login = () => {
       supabaseClient={supabase}
       appearance={{ theme: ThemeSupa }}
       providers={["google"]}
-      redirectTo='https://business-events-platform.netlify.app'
     />
   );
 };
