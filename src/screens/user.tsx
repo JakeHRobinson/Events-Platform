@@ -34,7 +34,7 @@ function UserScreen() {
     const { data, error } = await supabase
       .from("Users")
       .select("*")
-      .eq("uuid", currSession?.user.id);
+      .eq("uuid", currSession?.id);
 
     if (data?.length === 0) {
       addUser();
