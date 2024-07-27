@@ -1,8 +1,5 @@
-import { useState } from "react";
-import { Button } from "react-bootstrap";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
-import getUser from "../utils/getUser";
 import supabase from "../utils/supabase";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
@@ -51,12 +48,12 @@ const Login = () => {
   // }
 
   supabase.auth.onAuthStateChange(async (event) => {
-    if(event === 'SIGNED_IN'){
-      navigate('/')
+    if (event === "SIGNED_IN") {
+      navigate("/");
     } else {
-      console.log(event)
+      console.log(event);
     }
-  })
+  });
   return (
     // <form
     //   className="login-form"
