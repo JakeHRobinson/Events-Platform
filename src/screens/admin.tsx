@@ -58,7 +58,7 @@ function AdminScreen() {
         }
       })
       .then((user) => {
-        if (user === undefined || user.type !== "admin") {
+        if (user === undefined || user.type !== "admin" || user === null) {
           navigate("/home");
         }
       });
