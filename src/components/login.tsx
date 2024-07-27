@@ -9,10 +9,10 @@ const Login = () => {
   // const [email, setEmail] = useState<string>("");
   // const [password, setPassword] = useState<string>("");
 
-  const redirect =
-    import.meta.env.VITE_ENVIRONMENT === "development"
-      ? "http://localhost:5173"
-      : "https://business-events-platform.netlify.app";
+  // const redirect =
+  //   import.meta.env.VITE_ENVIRONMENT === "development"
+  //     ? "http://localhost:5173"
+  //     : "https://business-events-platform.netlify.app";
 
   // async function signInWithEmail(event: React.FormEvent<HTMLFormElement>) {
   //   event.preventDefault();
