@@ -55,6 +55,8 @@ function AdminScreen() {
       .then((session) => {
         if (session && session.id !== null && session.id !== undefined) {
           return getUser(session.id);
+        } else if (session === null){
+          navigate("/home")
         }
       })
       .then((user) => {
