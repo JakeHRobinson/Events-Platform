@@ -24,7 +24,7 @@ const Login = () => {
       supabaseClient={supabase}
       appearance={{ theme: ThemeSupa }}
       providers={["google"]}
-      redirectTo={redirect}
+      redirectTo='https://business-events-platform.netlify.app'
     />
   );
 };
