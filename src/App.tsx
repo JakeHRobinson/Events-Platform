@@ -12,7 +12,6 @@ import Signup from "./components/signup";
 import Login from "./components/login";
 import AccountScreen from "./screens/account";
 import EventScreen from "./screens/eventScreen";
-import PaymentScreen from "./screens/paymentScreen";
 
 function App() {
   return (
@@ -26,7 +25,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/account" element={<AccountScreen />} />
         <Route path="/event/:id" element={<EventScreen />} />
-        <Route path="/payment/:id" element={<PaymentScreen />} />
       </Routes>
     </Router>
   );
