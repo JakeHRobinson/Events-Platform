@@ -4,10 +4,10 @@ import { useParams } from "react-router-dom";
 import "./eventScreen.css";
 import { Button } from "react-bootstrap";
 // import { loadStripe } from "@stripe/stripe-js";
-import supabase from "../utils/supabase";
 import getSession from "../utils/getSession";
 import getUser from "../utils/getUser";
-
+import supabase from "../utils/supabase";
+import getAccessToken from "../utils/getAccessToken";
 
 interface SingleEvent {
   created_at: Date;
@@ -31,6 +31,22 @@ interface User {
   event_sign_ups: number[];
 }
 
+interface UserSession {
+  email?: string;
+  id?: string;
+  user_metadata?: {
+    username?: string;
+  };
+}
+
+interface Session {
+  access_token?: string;
+  provider_token?: string | null;
+  refresh_token?: string;
+  token_type?: string;
+  user?: UserSession;
+}
+
 function EventScreen() {
   const [event, setEvent] = useState<SingleEvent>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -38,9 +54,8 @@ function EventScreen() {
   const [user, setUser] = useState<User | null>(null);
   const [disabled, setDisabled] = useState<boolean>(false);
   const [userEvents, setUserEvents] = useState<number[]>([]);
+  const [session, setSession] = useState<Session | null>(null);
   let { id } = useParams();
-
-  // const navigate = useNavigate()
 
   useEffect(() => {
     setLoading(true);
@@ -65,6 +80,12 @@ function EventScreen() {
           setUser(user);
         });
     }
+
+    getAccessToken().then((session) => {
+      if (session !== null && session !== undefined) {
+        setSession(session);
+      }
+    });
   }, []);
 
   const signedUpCheck = async () => {
@@ -72,6 +93,39 @@ function EventScreen() {
       setSignedUp(true);
     } else {
       setSignedUp(false);
+    }
+  };
+
+  const addToGoogleCalendar = async () => {
+    console.log("adding to calendar");
+    if (event !== null && event !== undefined) {
+      const eventObject = {
+        summary: event.title,
+        description: event.description,
+        start: {
+          dateTime: new Date(`${event.date}T${event.time_start}`).toISOString(),
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        },
+        end: {
+          dateTime: new Date(`${event.date}T${event.time_end}`).toISOString(),
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        },
+      };
+
+      await fetch(
+        "https://www.googleapis.com/calendar/v3/calendars/primary/events",
+        {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + session?.provider_token,
+          },
+          body: JSON.stringify(eventObject),
+        }
+      ).then((data) => {
+        return data.json();
+      }).then((data) => {
+        console.log(data)
+      })
     }
   };
 
@@ -151,8 +205,15 @@ function EventScreen() {
               Sign up and pay
             </Button>
           ) : (
-            <Button onClick={() => {console.log(window.location.href)}}>Sign up</Button>
+            <Button
+              onClick={() => {
+                console.log(window.location.href);
+              }}
+            >
+              Sign up
+            </Button>
           )}
+          <Button onClick={addToGoogleCalendar}>Add to Google Calendar</Button>
         </div>
       </div>
     )

@@ -8,18 +8,26 @@ interface User {
   };
 }
 
-async function getSession(): Promise<User | null> {
+interface Session {
+  access_token?: string;
+  provider_token?: string | null;
+  refresh_token?: string;
+  token_type?: string;
+  user?: User;
+}
+
+async function getAccessToken(): Promise<Session | null> {
   const {
     data: { session },
     error,
   } = await supabase.auth.getSession();
-  
+
   if (error || !session) {
     console.log(error || "There is no current session", session);
     return null;
   }
-  // console.log(session);
-  return session.user;
+//   console.log(session);
+  return session;
 }
 
-export default getSession;
+export default getAccessToken;
