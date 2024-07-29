@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import supabase from "../utils/supabase";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { Button } from "react-bootstrap";
+
 
 const Login = () => {
   const navigate = useNavigate();
