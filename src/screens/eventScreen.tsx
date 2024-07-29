@@ -88,6 +88,33 @@ function EventScreen() {
     });
   }, []);
 
+  const signInWithGoogle = async () => {
+    const scopes = [
+      "profile",
+      "email",
+      "openid",
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/calendar",
+    ].join(" ");
+
+    const redirect =
+      import.meta.env.VITE_ENVIRONMENT === "development"
+        ? `http://localhost:5173/event/${id}`
+        : `https://business-events-platform.netlify.app/event/${id}`;
+
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        scopes: scopes,
+        redirectTo: redirect,
+      },
+    });
+
+    if (error) {
+      alert("There was a problem signing you in with google");
+    }
+  };
+
   const signedUpCheck = async () => {
     if (event && event.id && userEvents.includes(event.id)) {
       setSignedUp(true);
@@ -121,12 +148,14 @@ function EventScreen() {
           },
           body: JSON.stringify(eventObject),
         }
-      ).then((data) => {
-        return data.json();
-      }).then((data) => {
-        console.log(data)
-        alert("Success, please check your google calendar!")
-      })
+      )
+        .then((data) => {
+          return data.json();
+        })
+        .then((data) => {
+          console.log(data);
+          alert("Success, please check your google calendar!");
+        });
     }
   };
 
@@ -214,7 +243,17 @@ function EventScreen() {
               Sign up
             </Button>
           )}
-          <Button onClick={addToGoogleCalendar}>Add to Google Calendar</Button>
+          <Button
+            onClick={() => {
+              if (session?.provider_token) {
+                addToGoogleCalendar();
+              } else {
+                signInWithGoogle();
+              }
+            }}
+          >
+            Add to Google Calendar
+          </Button>
         </div>
       </div>
     )
