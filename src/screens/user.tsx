@@ -22,6 +22,7 @@ interface User {
   id?: string;
   user_metadata?: {
     username?: string;
+    full_name?: string;
   };
 }
 
@@ -44,9 +45,12 @@ function UserScreen() {
   }
 
   async function addUser() {
+    const username = currSession?.user_metadata?.username
+      ? currSession.user_metadata.username
+      : currSession?.user_metadata?.full_name;
     const { error } = await supabase.from("Users").insert([
       {
-        username: currSession?.user_metadata?.username,
+        username: username,
         email: currSession?.email,
         uuid: currSession?.id,
         type: "personal",
