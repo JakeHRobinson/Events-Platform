@@ -125,6 +125,7 @@ function EventScreen() {
         return data.json();
       }).then((data) => {
         console.log(data)
+        alert("Success, please check your google calendar!")
       })
     }
   };

@@ -21,3 +21,17 @@
   font-size: 12px;
   padding: 5px;
 }
+
+.google-login {
+  cursor: pointer;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  color: rgb(73, 73, 73);
+  background-color: white;
+  font-weight: 400;
+  width: 210px;
+}
+
+.google-login:hover {
+  border-color: black;
+}

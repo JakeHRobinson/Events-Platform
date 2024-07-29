@@ -44,7 +44,7 @@ const Login = () => {
   });
   return (
     <>
-      <div onClick={signInWithGoogle}>Sign In With Google</div>
+      <button className="google-login" onClick={signInWithGoogle}>Sign In With Google</button>
       <Auth
         supabaseClient={supabase}
         appearance={{ theme: ThemeSupa }}
