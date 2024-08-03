@@ -27,6 +27,10 @@ const Login = () => {
       options: {
         scopes: scopes,
         redirectTo: redirect,
+        queryParams: {
+          access_type: "offline",
+          prompt: "consent",
+        },
       },
     });
 

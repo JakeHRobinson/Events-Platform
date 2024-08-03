@@ -7,6 +7,7 @@ import getSession from "../utils/getSession";
 import getUser from "../utils/getUser";
 import supabase from "../utils/supabase";
 import getAccessToken from "../utils/getAccessToken";
+import requestGoogleProviderToken from "../utils/getProviderToken";
 
 interface SingleEvent {
   created_at: Date;
@@ -36,14 +37,12 @@ interface UserSession {
   user_metadata?: {
     username?: string;
   };
-  identities?: Array<identityArray | null>;
-}
-
-interface identityArray {
-  identity_data?: {
-    provider_id?: string;
-  };
-  provider?: string;
+  identities?: {
+    identity_id: string;
+    provider_id: string;
+    access_token: string;
+    provider: string;
+  }[];
 }
 
 interface Session {
@@ -101,19 +100,23 @@ function EventScreen() {
         ? `http://localhost:5173/event/${id}`
         : `https://business-events-platform.netlify.app/event/${id}`;
 
-        const scopes = [
-          "profile",
-          "email",
-          "openid",
-          "https://www.googleapis.com/auth/userinfo.email",
-          "https://www.googleapis.com/auth/calendar",
-        ].join(" ");
+    const scopes = [
+      "profile",
+      "email",
+      "openid",
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/calendar",
+    ].join(" ");
 
     const { data, error } = await supabase.auth.linkIdentity({
       provider: "google",
       options: {
         scopes: scopes,
         redirectTo: redirect,
+        queryParams: {
+          access_type: "offline",
+          prompt: "consent",
+        },
       },
     });
 
@@ -165,8 +168,12 @@ function EventScreen() {
           return data.json();
         })
         .then((data) => {
-          console.log(data);
-          alert("Success, please check your google calendar!");
+          if (data.error) {
+            alert("There was a problem adding to your calendar");
+            console.log(data.error);
+          } else {
+            alert("Success, please check your google calendar!");
+          }
         });
     }
   };
@@ -208,13 +215,16 @@ function EventScreen() {
     }
   };
 
-  // const unlinkHandler = async () => {
-  // const {data: {identities}} = await supabase.auth.getUserIdentities();
+  // below function needed for testing, it unlinks any google provider accounts from an email provider account.
 
-  // const googleIdentities = identities.find(identity => identity.provider === 'google')
-  // console.log(identities)
-  // const {error} = await supabase.auth.unlinkIdentity(googleIdentities)
-  // }
+  // const unlinkHandler = async () => {
+
+  //   const googleIdentities = session?.user?.identities.find(
+  //     (identity) => identity.provider === "google"
+  //   );
+  //   // console.log(identities);
+  //   const { error } = await supabase.auth.unlinkIdentity(googleIdentities);
+  // };
 
   return loading ? (
     <div>Loading...</div>
@@ -261,9 +271,15 @@ function EventScreen() {
             onClick={async () => {
               if (!session) {
                 alert("Please log in to continue.");
-              } else if (!session.provider_token) {
+              } else if (
+                !session.user?.identities?.find(
+                  (identity) => identity.provider.toLowerCase() === "google"
+                )
+              ) {
                 try {
-                  linkIdentity().then((data) => {console.log(data?.provider, "<----------------")})
+                  linkIdentity().then((data) => {
+                    console.log(data?.provider, "<----------------");
+                  });
                 } catch (error) {
                   console.error("Failed to link Google account:", error);
                   alert(
@@ -271,6 +287,7 @@ function EventScreen() {
                   );
                 }
               } else {
+                console.log(session, "you fucked up ");
                 addToGoogleCalendar();
               }
             }}
