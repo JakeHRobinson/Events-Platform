@@ -2,7 +2,7 @@
 
 ## Description
 
-This project is a comprehensive business events platform designed to streamline event management and participation. It leverages cutting-edge technologies to offer a seamless experience for users and administrators alike.
+This project is a comprehensive business events platform designed to streamline event management and participation. It leverages cutting-edge technologies to offer a seamless experience for users and administrators.
 
 ### Technologies Used
 
@@ -23,4 +23,4 @@ Due to the nature of the backend architecture and the reliance on Google Authent
 - **Testing Accounts**: As the project utilizes Supabase and Google Authentication, it's currently impossible to provide testing accounts due to security and privacy considerations.
 - **Local Hosting**: Local hosting of the project requires multiple API keys, which cannot be distributed publicly.
 
-Thank you for your understanding and interest in the Business Events Platform. We hope you find our project inspiring and look forward to any feedback or contributions you might have.
+Thank you for your understanding and interest in the Business Events Platform. I hope you find my project inspiring and look forward to any feedback or contributions you might have.
