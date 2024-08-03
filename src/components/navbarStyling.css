@@ -5,9 +5,15 @@
     transform: translateX(-50%); 
     width: 100%;  
     z-index: 1030;
+    height: 70px;
   }
 
   .bottom-wrapper {
     display: flex;
     justify-content: space-between;
+}
+
+.navbar-centered.bg-body-tertiary {
+  background-color: rgb(193, 177, 250) !important; 
+  color: white !important;
 }

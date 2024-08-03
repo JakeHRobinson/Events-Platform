@@ -208,7 +208,7 @@ function EventScreen() {
             <p className="event-description">{event.description}</p>
           </div>
           <div className="price-date">
-            <p>Price: {event.price}</p>
+            <p>Price: {event.price} *</p>
             <p>
               Date:{" "}
               {new Date(event.date).toLocaleDateString("en-GB", {
@@ -219,7 +219,7 @@ function EventScreen() {
               })}
             </p>
           </div>
-          {event.price.toString().includes("£") ? (
+          <div className="button-wrapper-signup">
             <Button
               onClick={() => {
                 signedUpCheck().then(() => {
@@ -232,28 +232,21 @@ function EventScreen() {
               }}
               disabled={disabled}
             >
-              Sign up and pay
+              Book now
             </Button>
-          ) : (
             <Button
               onClick={() => {
-                console.log(window.location.href);
+                if (session?.provider_token) {
+                  addToGoogleCalendar();
+                } else {
+                  signInWithGoogle();
+                }
               }}
             >
-              Sign up
+              Add to Calendar
             </Button>
-          )}
-          <Button
-            onClick={() => {
-              if (session?.provider_token) {
-                addToGoogleCalendar();
-              } else {
-                signInWithGoogle();
-              }
-            }}
-          >
-            Add to Google Calendar
-          </Button>
+          </div>
+          <p className="payment">*Payment taken on the door</p>
         </div>
       </div>
     )

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+// import NavDropdown from "react-bootstrap/NavDropdown";
 import { useNavigate, useLocation } from "react-router-dom";
 import getSession from "../utils/getSession";
 import "./navbarStyling.css";
@@ -68,18 +68,18 @@ function NavBar() {
             >
               Home
             </Nav.Link>
-            <Nav.Link>Link</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+            {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item>placeholder</NavDropdown.Item>
               <NavDropdown.Item>placeholder 2</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">
-                Separated link
+              Separated link
               </NavDropdown.Item>
-            </NavDropdown>
+              </NavDropdown> */}
           </Nav>
           <Nav>
+            {session !== null && <Nav.Link>My Events</Nav.Link>}
             <Nav.Link
               onClick={() => {
                 session === null ? navigate("/login") : navigate("account");
