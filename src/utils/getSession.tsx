@@ -18,7 +18,7 @@ async function getSession(): Promise<User | null> {
     console.log(error || "There is no current session", session);
     return null;
   }
-  // console.log(session);
+  console.log(session);
   return session.user;
 }
 

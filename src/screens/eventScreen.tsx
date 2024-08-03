@@ -3,7 +3,6 @@ import singleEventData from "../utils/singleEventData";
 import { useParams } from "react-router-dom";
 import "./eventScreen.css";
 import { Button } from "react-bootstrap";
-// import { loadStripe } from "@stripe/stripe-js";
 import getSession from "../utils/getSession";
 import getUser from "../utils/getUser";
 import supabase from "../utils/supabase";
@@ -37,6 +36,14 @@ interface UserSession {
   user_metadata?: {
     username?: string;
   };
+  identities?: Array<identityArray | null>;
+}
+
+interface identityArray {
+  identity_data?: {
+    provider_id?: string;
+  };
+  provider?: string;
 }
 
 interface Session {
@@ -88,21 +95,21 @@ function EventScreen() {
     });
   }, []);
 
-  const signInWithGoogle = async () => {
-    const scopes = [
-      "profile",
-      "email",
-      "openid",
-      "https://www.googleapis.com/auth/userinfo.email",
-      "https://www.googleapis.com/auth/calendar",
-    ].join(" ");
-
+  const linkIdentity = async () => {
     const redirect =
       import.meta.env.VITE_ENVIRONMENT === "development"
         ? `http://localhost:5173/event/${id}`
         : `https://business-events-platform.netlify.app/event/${id}`;
 
-    const { error } = await supabase.auth.signInWithOAuth({
+        const scopes = [
+          "profile",
+          "email",
+          "openid",
+          "https://www.googleapis.com/auth/userinfo.email",
+          "https://www.googleapis.com/auth/calendar",
+        ].join(" ");
+
+    const { data, error } = await supabase.auth.linkIdentity({
       provider: "google",
       options: {
         scopes: scopes,
@@ -111,7 +118,9 @@ function EventScreen() {
     });
 
     if (error) {
-      alert("There was a problem signing you in with google");
+      console.log(error);
+    } else {
+      return data;
     }
   };
 
@@ -125,6 +134,9 @@ function EventScreen() {
 
   const addToGoogleCalendar = async () => {
     console.log("adding to calendar");
+    const providerToken = session?.provider_token
+      ? session.provider_token
+      : session?.access_token;
     if (event !== null && event !== undefined) {
       const eventObject = {
         summary: event.title,
@@ -144,7 +156,7 @@ function EventScreen() {
         {
           method: "POST",
           headers: {
-            Authorization: "Bearer " + session?.provider_token,
+            Authorization: "Bearer " + providerToken,
           },
           body: JSON.stringify(eventObject),
         }
@@ -196,6 +208,14 @@ function EventScreen() {
     }
   };
 
+  // const unlinkHandler = async () => {
+  // const {data: {identities}} = await supabase.auth.getUserIdentities();
+
+  // const googleIdentities = identities.find(identity => identity.provider === 'google')
+  // console.log(identities)
+  // const {error} = await supabase.auth.unlinkIdentity(googleIdentities)
+  // }
+
   return loading ? (
     <div>Loading...</div>
   ) : (
@@ -219,9 +239,9 @@ function EventScreen() {
               })}
             </p>
           </div>
-          {event.price.toString().includes("£") ? (
-            <Button
-              onClick={() => {
+          <Button
+            onClick={() => {
+              if (session) {
                 signedUpCheck().then(() => {
                   if (user && signedUp === false) {
                     signupHandler(user);
@@ -229,31 +249,35 @@ function EventScreen() {
                     alert("You're already signed up to this event!");
                   }
                 });
-              }}
-              disabled={disabled}
-            >
-              Sign up and pay
-            </Button>
-          ) : (
-            <Button
-              onClick={() => {
-                console.log(window.location.href);
-              }}
-            >
-              Sign up
-            </Button>
-          )}
-          <Button
-            onClick={() => {
-              if (session?.provider_token) {
-                addToGoogleCalendar();
               } else {
-                signInWithGoogle();
+                alert("Please login to book an event");
+              }
+            }}
+            disabled={disabled}
+          >
+            Book now
+          </Button>
+          <Button
+            onClick={async () => {
+              if (!session) {
+                alert("Please log in to continue.");
+              } else if (!session.provider_token) {
+                try {
+                  linkIdentity().then((data) => {console.log(data?.provider, "<----------------")})
+                } catch (error) {
+                  console.error("Failed to link Google account:", error);
+                  alert(
+                    "Failed to link your Google account. Please try again."
+                  );
+                }
+              } else {
+                addToGoogleCalendar();
               }
             }}
           >
             Add to Google Calendar
           </Button>
+          {/* <Button onClick={unlinkHandler}>unlink</Button> */}
         </div>
       </div>
     )
