@@ -26,7 +26,6 @@ interface UserProfile {
 }
 
 function NavBar() {
-
   const [session, setSession] = useState<User | null>(null);
   const [user, setUser] = useState<UserProfile | null>(null);
   const location = useLocation();
@@ -79,7 +78,11 @@ function NavBar() {
               </NavDropdown> */}
           </Nav>
           <Nav>
-            {session !== null && <Nav.Link>My Events</Nav.Link>}
+            {session !== null && (
+              <Nav.Link onClick={() => navigate("/my-events")}>
+                My Events
+              </Nav.Link>
+            )}
             <Nav.Link
               onClick={() => {
                 session === null ? navigate("/login") : navigate("account");

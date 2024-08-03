@@ -8,6 +8,7 @@ import Login from "./components/login";
 import AccountScreen from "./screens/account";
 import EventScreen from "./screens/eventScreen";
 import PrivacyPolicy from "./components/privacyPolicy";
+import MyEvents from "./screens/myEvents";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/account" element={<AccountScreen />} />
         <Route path="/event/:id" element={<EventScreen />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/my-events" element={<MyEvents />} />
       </Routes>
     </Router>
   );
