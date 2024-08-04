@@ -222,6 +222,9 @@ function EventScreen() {
           <div className="button-wrapper-signup">
             <Button
               onClick={() => {
+                if(!session){
+                  alert("Please login to continue")
+                }
                 signedUpCheck().then(() => {
                   if (user && signedUp === false) {
                     signupHandler(user);
