@@ -224,6 +224,7 @@ function EventScreen() {
               onClick={() => {
                 if(!session){
                   alert("Please login to continue")
+                  return
                 }
                 signedUpCheck().then(() => {
                   if (user && signedUp === false) {
