@@ -45,17 +45,24 @@ function NavBar() {
 
   const navigate = useNavigate();
   return (
-    <Navbar expand="lg" className="navbar-centered bg-body-tertiary">
+    <Navbar
+      expand="lg"
+      bg="dark"
+      data-bs-theme="dark"
+      fixed="top"
+      
+    >
       <Container>
         <Navbar.Brand href="#home">Events</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Collapse id="basic-navbar-nav" className="collapse-show-menu">
           <Nav className="me-auto">
             {user?.type === "admin" && (
               <Nav.Link
                 onClick={() => {
                   navigate("/admin");
                 }}
+                className="dropdown-content"
               >
                 Admin
               </Nav.Link>
@@ -64,26 +71,22 @@ function NavBar() {
               onClick={() => {
                 navigate("/home");
               }}
+              className="dropdown-content"
             >
               Home
             </Nav.Link>
-            {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item>placeholder</NavDropdown.Item>
-              <NavDropdown.Item>placeholder 2</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-              Separated link
-              </NavDropdown.Item>
-              </NavDropdown> */}
           </Nav>
           <Nav>
             {session !== null && (
-              <Nav.Link onClick={() => navigate("/my-events")}>
+              <Nav.Link
+                onClick={() => navigate("/my-events")}
+                className="dropdown-content"
+              >
                 My Events
               </Nav.Link>
             )}
             <Nav.Link
+              className="dropdown-content"
               onClick={() => {
                 session === null ? navigate("/login") : navigate("account");
               }}

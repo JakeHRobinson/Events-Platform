@@ -1,3 +1,11 @@
+.parent-container {
+  display: flex;
+  justify-content: center;
+  height: auto;
+  padding-top: 50px;
+}
+
+
 .single-event-card-body {
   display: grid;
   grid-template-columns: 1fr;
@@ -5,10 +13,6 @@
   border: 1px solid lightgray;
   border-radius: 10px;
   padding: 20px 50px 100px 50px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width: 80vw;
   min-width: 320px;
 }

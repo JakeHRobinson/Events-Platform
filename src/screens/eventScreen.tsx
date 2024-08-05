@@ -200,57 +200,59 @@ function EventScreen() {
     <div>Loading...</div>
   ) : (
     event && (
-      <div className="single-event-card-body">
-        <img src={event.image_url} />
-        <div className="single-event-content-wrapper">
-          <div className="title-description">
-            <h2>{event.title}</h2>
-            <p className="event-description">{event.description}</p>
-          </div>
-          <div className="price-date">
-            <p>Price: {event.price} *</p>
-            <p>
-              Date:{" "}
-              {new Date(event.date).toLocaleDateString("en-GB", {
-                weekday: "long",
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </p>
-          </div>
-          <div className="button-wrapper-signup">
-            <Button
-              onClick={() => {
-                if(!session){
-                  alert("Please login to continue")
-                  return
-                }
-                signedUpCheck().then(() => {
-                  if (user && signedUp === false) {
-                    signupHandler(user);
-                  } else {
-                    alert("You're already signed up to this event!");
+      <div className="parent-container">
+        <div className="single-event-card-body">
+          <img src={event.image_url} />
+          <div className="single-event-content-wrapper">
+            <div className="title-description">
+              <h2>{event.title}</h2>
+              <p className="event-description">{event.description}</p>
+            </div>
+            <div className="price-date">
+              <p>Price: {event.price} *</p>
+              <p>
+                Date:{" "}
+                {new Date(event.date).toLocaleDateString("en-GB", {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </p>
+            </div>
+            <div className="button-wrapper-signup">
+              <Button
+                onClick={() => {
+                  if(!session){
+                    alert("Please login to continue")
+                    return
                   }
-                });
-              }}
-              disabled={disabled}
-            >
-              Book now
-            </Button>
-            <Button
-              onClick={() => {
-                if (session?.provider_token) {
-                  addToGoogleCalendar();
-                } else {
-                  signInWithGoogle();
-                }
-              }}
-            >
-              Add to Calendar
-            </Button>
+                  signedUpCheck().then(() => {
+                    if (user && signedUp === false) {
+                      signupHandler(user);
+                    } else {
+                      alert("You're already signed up to this event!");
+                    }
+                  });
+                }}
+                disabled={disabled}
+              >
+                Book now
+              </Button>
+              <Button
+                onClick={() => {
+                  if (session?.provider_token) {
+                    addToGoogleCalendar();
+                  } else {
+                    signInWithGoogle();
+                  }
+                }}
+              >
+                Add to Calendar
+              </Button>
+            </div>
+            <p className="payment">*Payment taken on the door</p>
           </div>
-          <p className="payment">*Payment taken on the door</p>
         </div>
       </div>
     )
