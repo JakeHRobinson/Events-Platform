@@ -37,6 +37,26 @@ function CreateWindow({ setCreating }: createWindowProps) {
     }
   };
 
+  async function checkRequiredFieldsFilled() {
+    const fields = [
+      editTitle,
+      editDescription,
+      editPrice,
+      editTimeStart,
+      editTimeEnd,
+      editDate,
+    ];
+
+    const isEmpty = fields.some((field) => field === "" || field === undefined);
+
+    if (isEmpty) {
+      alert("One or more required fields are empty");
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   const submitHandler = async () => {
     let finalPrice = "";
     if (isNaN(Number(editPrice))) {
@@ -44,31 +64,38 @@ function CreateWindow({ setCreating }: createWindowProps) {
     } else {
       finalPrice = "£" + editPrice;
     }
-    const { error } = await supabase.from("Events").insert([
-      {
-        title: editTitle,
-        description: editDescription,
-        price: finalPrice,
-        time_start: editTimeStart,
-        time_end: editTimeEnd,
-        date: editDate,
-        image_url: editImgURL,
-      },
-    ]);
 
-    if (error) {
-      console.log(error);
-      alert("That didn't work, please wait a few moments before trying again");
-    } else {
-      setCreating(false);
-    }
+    checkRequiredFieldsFilled().then(async (bool) => {
+      if (bool) {
+        const { error } = await supabase.from("Events").insert([
+          {
+            title: editTitle,
+            description: editDescription,
+            price: finalPrice,
+            time_start: editTimeStart,
+            time_end: editTimeEnd,
+            date: editDate,
+            image_url: editImgURL,
+          },
+        ]);
+
+        if (error) {
+          console.log(error);
+          alert(
+            "That didn't work, please wait a few moments before trying again"
+          );
+        } else {
+          setCreating(false);
+        }
+      }
+    });
   };
 
   return (
     <>
       <div className="popup-card-container">
         <div>
-          <FloatingLabel controlId="editTitle" label="Title" className="mb-3">
+          <FloatingLabel controlId="editTitle" label="Title *" className="mb-3">
             <Form.Control
               type="text"
               defaultValue={""}
@@ -77,7 +104,7 @@ function CreateWindow({ setCreating }: createWindowProps) {
               }}
             />
           </FloatingLabel>
-          <FloatingLabel controlId="editDescription" label="Description">
+          <FloatingLabel controlId="editDescription" label="Description *">
             <Form.Control
               as="textarea"
               defaultValue={""}
@@ -87,7 +114,7 @@ function CreateWindow({ setCreating }: createWindowProps) {
               }}
             />
           </FloatingLabel>
-          <FloatingLabel controlId="editDate" label="Choose Payment Method">
+          <FloatingLabel controlId="editDate" label="Choose Payment Method *">
             <Form.Select
               aria-label="Floating label select example"
               value={selectedOption}
@@ -112,7 +139,7 @@ function CreateWindow({ setCreating }: createWindowProps) {
               />
             </FloatingLabel>
           )}
-          <FloatingLabel controlId="customDate" label="Date" className="mb-3">
+          <FloatingLabel controlId="customDate" label="Date *" className="mb-3">
             <Form.Control
               type="date"
               defaultValue={""}
@@ -121,7 +148,7 @@ function CreateWindow({ setCreating }: createWindowProps) {
               }}
             />
           </FloatingLabel>
-          <FloatingLabel controlId="customTimeStart" label="Start Time">
+          <FloatingLabel controlId="customTimeStart" label="Start Time *">
             <Form.Control
               type="time"
               defaultValue={""}
@@ -130,7 +157,7 @@ function CreateWindow({ setCreating }: createWindowProps) {
               }}
             />
           </FloatingLabel>
-          <FloatingLabel controlId="customTimeEnd" label="End Time">
+          <FloatingLabel controlId="customTimeEnd" label="End Time *">
             <Form.Control
               type="time"
               defaultValue={""}

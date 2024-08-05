@@ -52,6 +52,26 @@ function EditWindow({ setEditing, singleEvent }: EventProps) {
     }
   };
 
+  async function checkRequiredFieldsFilled() {
+    const fields = [
+      editTitle,
+      editDescription,
+      editPrice,
+      editTimeStart,
+      editTimeEnd,
+      editDate,
+    ];
+
+    const isEmpty = fields.some((field) => field === "" || field === undefined);
+
+    if (isEmpty) {
+      alert("One or more required fields are empty");
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   const submitHandler = async () => {
     let finalPrice = "";
     if (isNaN(Number(editPrice))) {
@@ -59,27 +79,31 @@ function EditWindow({ setEditing, singleEvent }: EventProps) {
     } else {
       finalPrice = "£" + editPrice;
     }
-    const { error } = await supabase
-      .from("Events")
-      .update([
-        {
-          title: editTitle,
-          description: editDescription,
-          price: finalPrice,
-          time_start: editTimeStart,
-          time_end: editTimeEnd,
-          date: editDate,
-          image_url: editImgURL,
-        },
-      ])
-      .eq("id", singleEvent.id);
 
-    if (error) {
-      console.log(error);
-      alert("That didn't work, please wait a few moments before trying again");
-    } else {
-      setEditing(false);
-    }
+    checkRequiredFieldsFilled().then(async (bool) => {
+      if (bool) {
+        const { error } = await supabase.from("Events").insert([
+          {
+            title: editTitle,
+            description: editDescription,
+            price: finalPrice,
+            time_start: editTimeStart,
+            time_end: editTimeEnd,
+            date: editDate,
+            image_url: editImgURL,
+          },
+        ]);
+
+        if (error) {
+          console.log(error);
+          alert(
+            "That didn't work, please wait a few moments before trying again"
+          );
+        } else {
+          setEditing(false);
+        }
+      }
+    });
   };
 
   return (
