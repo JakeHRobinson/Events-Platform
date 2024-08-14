@@ -52,7 +52,7 @@ function AdminScreen() {
       .then(() => setLoading(false));
 
     getSession()
-      .then((session) => {
+        .then((session) => {
         if (session && session.id !== null && session.id !== undefined) {
           return getUser(session.id);
         } else if (session === null){

@@ -43,13 +43,7 @@ function NavBar() {
 
   const navigate = useNavigate();
   return (
-    <Navbar
-      expand="lg"
-      bg="dark"
-      data-bs-theme="dark"
-      fixed="top"
-      
-    >
+    <Navbar expand="lg" bg="dark" data-bs-theme="dark" fixed="top">
       <Container>
         <Navbar.Brand href="#home">Events</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

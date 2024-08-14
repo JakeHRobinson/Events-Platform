@@ -4,7 +4,6 @@ import supabase from "../utils/supabase";
 // import { Auth } from "@supabase/auth-ui-react";
 // import { ThemeSupa } from "@supabase/auth-ui-shared";
 
-
 const Login = () => {
   const navigate = useNavigate();
 
@@ -44,7 +43,9 @@ const Login = () => {
   });
   return (
     <>
-      <button className="google-login" onClick={signInWithGoogle}>Sign In With Google</button>
+      <button className="google-login" onClick={signInWithGoogle}>
+        Sign In With Google
+      </button>
       {/* <Auth
         supabaseClient={supabase}
         appearance={{ theme: ThemeSupa }}

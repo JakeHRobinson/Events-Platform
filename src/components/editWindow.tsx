@@ -82,17 +82,20 @@ function EditWindow({ setEditing, singleEvent }: EventProps) {
 
     checkRequiredFieldsFilled().then(async (bool) => {
       if (bool) {
-        const { error } = await supabase.from("Events").insert([
-          {
-            title: editTitle,
-            description: editDescription,
-            price: finalPrice,
-            time_start: editTimeStart,
-            time_end: editTimeEnd,
-            date: editDate,
-            image_url: editImgURL,
-          },
-        ]);
+        const { error } = await supabase
+          .from("Events")
+          .update([
+            {
+              title: editTitle,
+              description: editDescription,
+              price: finalPrice,
+              time_start: editTimeStart,
+              time_end: editTimeEnd,
+              date: editDate,
+              image_url: editImgURL,
+            },
+          ])
+          .eq("id", singleEvent.id);
 
         if (error) {
           console.log(error);
