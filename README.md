@@ -23,10 +23,7 @@ This project is a comprehensive business events platform designed to streamline 
 
 ### Access 
 
-Due to the nature of the backend architecture and the reliance on Google Authentication, direct access to the backend is restricted. 
-Similarly, local hosting of the project is not feasible as it requires API keys to my Supabase instance which as stated, is restricted.
-
-- **Email Contact**: For inquiries about the backend or any other concerns, please reach out via email at jakehuntlyrobinson@gmail.com.
+- **Email Contact**: For inquiries about the backend or any other issues, please reach out via email at jakehuntlyrobinson@gmail.com.
 - **Project URL**: You can explore the live version of the project at [https://business-events-platform.netlify.app](https://business-events-platform.netlify.app).
 
 ### Testing
