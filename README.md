@@ -28,7 +28,16 @@ Similarly, local hosting of the project is not feasible as it requires API keys 
 
 ### Test Account
 
-- **Testing Accounts**: If you'd like to view the Admin side of the app, you can use the following google account. Gmail - testingbusinessevents@gmail.com Pass - TestAdmin123
+- **Testing Accounts**:
+                      - Admin: If you'd like to view the Admin side of the app, you can use the following account. Email - testingbusinessevents@gmail.com Pass - TestAdmin123
+                      - User: If you'd like to view the User side of the app, you can use the following account. Email usertest@gmail.com Pass - TestUser123
 - **Local Hosting**: Local hosting of the project requires multiple API keys, which cannot be distributed publicly.
+
+### Google Logins
+
+- Currently, the functionality to add events to your Google Calendar is working if you're signed in with Google. However, when logging in with Google to test this feature, you may encounter a warning stating, "Google has not yet verified this app."
+
+- This warning appears because the app requires access to sensitive scopes in order to interact with your Google Calendar, which triggers Google's verification process. To streamline the experience and avoid having to manually add each user as a test user,
+  I have decided to apply for app verification by Google. Once verified, this warning will no longer appear, ensuring a smoother integration with Google Calendar.
 
 Thank you for your understanding and interest in the Business Events Platform. I hope you find my project inspiring and look forward to any feedback or contributions you might have.
