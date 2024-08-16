@@ -33,6 +33,8 @@ Similarly, local hosting of the project is not feasible as it requires API keys 
                       - User: If you'd like to view the User side of the app, you can use the following account. Email usertest@gmail.com Pass - TestUser123
 - **Local Hosting**: Local hosting of the project requires multiple API keys, which cannot be distributed publicly.
 
+- I appreciate not everyone will want to log in with their own google account. For that reason, I have a short video demonstrating the Google Calendar functionality when signed in with a Google Account here: https://youtu.be/5qpKQjUCDQs
+
 ### Google Logins
 
 - Currently, the functionality to add events to your Google Calendar is working if you're signed in with Google. However, when logging in with Google to test this feature, you may encounter a warning stating, "Google has not yet verified this app."
