@@ -1,6 +1,10 @@
 import supabase from "../utils/supabase";
 
 interface User {
+  app_metadata: {
+    provider: string;
+    providers?: string[];
+  };
   email?: string;
   id?: string;
   user_metadata?: {

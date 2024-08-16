@@ -40,6 +40,10 @@ interface UserSession {
 }
 
 interface Session {
+  app_metadata: {
+    provider: string;
+    providers?: string[];
+  };
   access_token?: string;
   provider_token?: string | null;
   refresh_token?: string;
@@ -55,6 +59,7 @@ function EventScreen() {
   const [disabled, setDisabled] = useState<boolean>(false);
   const [userEvents, setUserEvents] = useState<number[]>([]);
   const [session, setSession] = useState<Session | null>(null);
+  const [googleUser, setGoogleUser] = useState<boolean>(false);
   let { id } = useParams();
 
   useEffect(() => {
@@ -71,6 +76,9 @@ function EventScreen() {
           return getSession();
         })
         .then((session) => {
+          if (session?.app_metadata?.providers?.includes("google")) {
+            setGoogleUser(true);
+          }
           if (session && session.id) {
             return getUser(session.id);
           }
@@ -223,9 +231,9 @@ function EventScreen() {
             <div className="button-wrapper-signup">
               <Button
                 onClick={() => {
-                  if(!session){
-                    alert("Please login to continue")
-                    return
+                  if (!session) {
+                    alert("Please login to continue");
+                    return;
                   }
                   signedUpCheck().then(() => {
                     if (user && signedUp === false) {
@@ -247,6 +255,7 @@ function EventScreen() {
                     signInWithGoogle();
                   }
                 }}
+                disabled={!googleUser}
               >
                 Add to Calendar
               </Button>

@@ -9,6 +9,10 @@ interface User {
 }
 
 interface Session {
+  app_metadata: {
+    provider: string;
+    providers?: string[];
+  };
   access_token?: string;
   provider_token?: string | null;
   refresh_token?: string;
@@ -26,7 +30,7 @@ async function getAccessToken(): Promise<Session | null> {
     console.log(error || "There is no current session", session);
     return null;
   }
-//   console.log(session);
+  //   console.log(session);
   return session;
 }
 

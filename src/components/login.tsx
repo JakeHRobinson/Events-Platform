@@ -1,8 +1,8 @@
 import "./login.css";
 import { useNavigate } from "react-router-dom";
 import supabase from "../utils/supabase";
-// import { Auth } from "@supabase/auth-ui-react";
-// import { ThemeSupa } from "@supabase/auth-ui-shared";
+import { Auth } from "@supabase/auth-ui-react";
+import { ThemeSupa } from "@supabase/auth-ui-shared";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -46,11 +46,11 @@ const Login = () => {
       <button className="google-login" onClick={signInWithGoogle}>
         Sign In With Google
       </button>
-      {/* <Auth
+      <Auth
         supabaseClient={supabase}
         appearance={{ theme: ThemeSupa }}
         providers={[]}
-      /> */}
+      />
     </>
   );
 };
