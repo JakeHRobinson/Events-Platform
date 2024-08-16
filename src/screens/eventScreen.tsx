@@ -256,7 +256,7 @@ function EventScreen() {
                     ? { backgroundColor: "green", borderColor: "green" }
                     : {}
                 }
-                disabled={signedUp ? true : false}
+                disabled={disabled || signedUp ? true : false}
               >
                 {signedUp ? "Booked!" : "Book Now"}
               </Button>
