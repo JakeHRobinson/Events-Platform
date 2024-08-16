@@ -10,7 +10,9 @@ async function getAdminData() {
     console.log(error);
   }
 
-  return data;
+  if (data) {
+    return data;
+  }
 }
 
 export default getAdminData;

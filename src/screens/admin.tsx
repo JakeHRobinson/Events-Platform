@@ -37,7 +37,11 @@ function AdminScreen() {
       () => {
         setLoading(true);
         getAdminData()
-          .then((data) => setEventData(data))
+          .then((data) => {
+            if (data) {
+              setEventData(data);
+            }
+          })
           .then(() => setLoading(false));
       }
     )
@@ -46,7 +50,11 @@ function AdminScreen() {
   useEffect(() => {
     setLoading(true);
     getAdminData()
-      .then((data) => setEventData(data))
+      .then((data) => {
+        if (data) {
+          setEventData(data);
+        }
+      })
       .then(() => setLoading(false));
 
     getSession()
