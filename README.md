@@ -8,7 +8,7 @@ This project is a comprehensive business events platform designed to streamline 
 
 - **Backend**: Supabase is utilized to host and manage the backend services, providing robust database capabilities and user authentication functionalities.
 - **Frontend**: The frontend is built using React with TypeScript, powered by Vite for efficient development and deployment.
-- **Google Integration**: A Google Cloud project is integrated to access Google's Calendar API, enabling users to interact with their Google Calendars directly from the application.
+- **Google Integration**: A Google Cloud project is integrated to access a users Google Calendar, enabling automatic creation of events directly from the application.
 - **Hosting**: The application is hosted on Netlify, offering a reliable and scalable hosting solution.
 
 ### User Features
