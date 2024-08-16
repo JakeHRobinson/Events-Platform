@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import EventCard from "../components/eventCardAdmin";
 import "./admin.css";
-import getData from "../utils/eventData";
+import getAdminData from "../utils/getAdminData";
 import getSession from "../utils/getSession";
 import getUser from "../utils/getUser";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import CreateWindow from "../components/createListing";
-import supabase from "../utils/supabase"
+import supabase from "../utils/supabase";
 
 interface Event {
   created_at: Date;
@@ -24,11 +24,9 @@ interface Event {
 function AdminScreen() {
   const navigate = useNavigate();
 
-
   const [eventData, setEventData] = useState<Event[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [creating, setCreating] = useState<boolean>(false);
-
 
   //@ts-ignore: Unused variable, but needed for db table listener
   const EventsListener = supabase
@@ -38,7 +36,7 @@ function AdminScreen() {
       { event: "*", schema: "public", table: "Events" },
       () => {
         setLoading(true);
-        getData()
+        getAdminData()
           .then((data) => setEventData(data))
           .then(() => setLoading(false));
       }
@@ -47,16 +45,16 @@ function AdminScreen() {
 
   useEffect(() => {
     setLoading(true);
-    getData()
+    getAdminData()
       .then((data) => setEventData(data))
       .then(() => setLoading(false));
 
     getSession()
-        .then((session) => {
+      .then((session) => {
         if (session && session.id !== null && session.id !== undefined) {
           return getUser(session.id);
-        } else if (session === null){
-          navigate("/home")
+        } else if (session === null) {
+          navigate("/home");
         }
       })
       .then((user) => {
