@@ -96,6 +96,12 @@ function EventScreen() {
     });
   }, []);
 
+  useEffect(() => {
+    if (event && user?.event_sign_ups.includes(event.id)) {
+      setSignedUp(true);
+    }
+  }, [user, event]);
+
   const signInWithGoogle = async () => {
     const scopes = [
       "profile",
@@ -181,6 +187,7 @@ function EventScreen() {
       }
 
       if (event?.id && !userEvents.includes(event.id)) {
+        console.log(userEvents);
         const updatedUserSignUps = [...userEvents, event?.id];
         const { error } = await supabase
           .from("Users")
@@ -193,9 +200,10 @@ function EventScreen() {
 
         setUserEvents(updatedUserSignUps);
         setDisabled(false);
+        setSignedUp(true);
       } else {
         alert("You have already signed up to this event!");
-        setDisabled(false);
+        setDisabled(true);
       }
     } catch (error) {
       console.error(error);
@@ -239,14 +247,20 @@ function EventScreen() {
                     if (user && signedUp === false) {
                       signupHandler(user);
                     } else {
-                      alert("You're already signed up to this event!");
+                      setDisabled(true);
                     }
                   });
                 }}
-                disabled={disabled}
+                style={
+                  signedUp
+                    ? { backgroundColor: "green", borderColor: "green" }
+                    : {}
+                }
+                disabled={signedUp ? true : false}
               >
-                Book now
+                {signedUp ? "Booked!" : "Book Now"}
               </Button>
+
               <Button
                 onClick={() => {
                   if (session?.provider_token) {
