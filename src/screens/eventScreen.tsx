@@ -40,8 +40,8 @@ interface UserSession {
 }
 
 interface Session {
-  app_metadata: {
-    provider: string;
+  app_metadata?: {
+    provider?: string;
     providers?: string[];
   };
   access_token?: string;
