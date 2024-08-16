@@ -16,6 +16,7 @@ This project is a comprehensive business events platform designed to streamline 
 - **Login Page**: This is where a user is able to login/signup either through Google, or with an email and password.
 - **Home Page**: This is where a user is able to see all upcoming events, and are able to click on each event to see more details.
 - **Event Page**: This is where a user is able to book an event, and add an event to their Google Calender if they have signed up.
+    - I appreciate not everyone will want to log in with their own google account. For that reason, I have a short video demonstrating the Google Calendar functionality when signed in with a Google Account here: https://youtu.be/5qpKQjUCDQs
 
 ### Admin Features
 
@@ -34,8 +35,6 @@ This project is a comprehensive business events platform designed to streamline 
   
 - User: If you'd like to view the User side of the app, you can use the following account.
 - Email usertest@gmail.com Pass - TestUser123
-
-- I appreciate not everyone will want to log in with their own google account. For that reason, I have a short video demonstrating the Google Calendar functionality when signed in with a Google Account here: https://youtu.be/5qpKQjUCDQs
 
 ### Google Logins
 
