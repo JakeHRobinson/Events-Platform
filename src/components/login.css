@@ -32,6 +32,10 @@
   width: 210px;
 }
 
+.or {
+  padding-top: 15px;
+}
+
 .google-login:hover {
   border-color: black;
 }

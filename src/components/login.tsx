@@ -46,6 +46,7 @@ const Login = () => {
       <button className="google-login" onClick={signInWithGoogle}>
         Sign In With Google
       </button>
+      <div className="or"> or login with email: </div>
       <Auth
         supabaseClient={supabase}
         appearance={{ theme: ThemeSupa }}
