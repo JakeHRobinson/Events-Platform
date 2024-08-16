@@ -113,7 +113,7 @@ function EditWindow({ setEditing, singleEvent }: EventProps) {
     <>
       <div className="popup-card-container">
         <div>
-          <FloatingLabel controlId="editTitle" label="Title" className="mb-3">
+          <FloatingLabel controlId="editTitle" label="Title *" className="mb-3">
             <Form.Control
               type="text"
               defaultValue={singleEvent.title}
@@ -122,7 +122,7 @@ function EditWindow({ setEditing, singleEvent }: EventProps) {
               }}
             />
           </FloatingLabel>
-          <FloatingLabel controlId="editDescription" label="Description">
+          <FloatingLabel controlId="editDescription" label="Description *">
             <Form.Control
               as="textarea"
               defaultValue={singleEvent.description}
@@ -132,7 +132,7 @@ function EditWindow({ setEditing, singleEvent }: EventProps) {
               }}
             />
           </FloatingLabel>
-          <FloatingLabel controlId="editDate" label="Choose Payment Method">
+          <FloatingLabel controlId="editDate" label="Choose Payment Method *">
             <Form.Select
               aria-label="Floating label select example"
               value={selectedOption}
@@ -147,7 +147,7 @@ function EditWindow({ setEditing, singleEvent }: EventProps) {
             </Form.Select>
           </FloatingLabel>
           {showCustomAmount && (
-            <FloatingLabel controlId="customAmount" label="Price (£)">
+            <FloatingLabel controlId="customAmount" label="Price (£) *">
               <Form.Control
                 type="number"
                 defaultValue={
@@ -163,7 +163,7 @@ function EditWindow({ setEditing, singleEvent }: EventProps) {
               />
             </FloatingLabel>
           )}
-          <FloatingLabel controlId="customDate" label="Date" className="mb-3">
+          <FloatingLabel controlId="customDate" label="Date *" className="mb-3">
             <Form.Control
               type="date"
               defaultValue={
@@ -174,7 +174,7 @@ function EditWindow({ setEditing, singleEvent }: EventProps) {
               }}
             />
           </FloatingLabel>
-          <FloatingLabel controlId="customTimeStart" label="Start Time">
+          <FloatingLabel controlId="customTimeStart" label="Start Time *">
             <Form.Control
               type="time"
               defaultValue={singleEvent.time_start}
@@ -183,7 +183,7 @@ function EditWindow({ setEditing, singleEvent }: EventProps) {
               }}
             />
           </FloatingLabel>
-          <FloatingLabel controlId="customTimeEnd" label="End Time">
+          <FloatingLabel controlId="customTimeEnd" label="End Time *">
             <Form.Control
               type="time"
               defaultValue={singleEvent.time_end}
