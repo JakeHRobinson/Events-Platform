@@ -13,9 +13,9 @@ This project is a comprehensive business events platform designed to streamline 
 
 ### Features
 
-- User accounts through Google Authentication
+- User accounts through Google Authentication or Email signup
 - Viewing and booking events
-- Adding events to a users Google Calendar
+- Adding events to a users Google Calendar if a user has signed in through Google
 - Creating, editing and deleting events on the Admin side
 
 ### Access 
