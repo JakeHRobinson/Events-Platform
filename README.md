@@ -11,11 +11,14 @@ This project is a comprehensive business events platform designed to streamline 
 - **Google Integration**: A Google Cloud project is integrated to access Google's Calendar API, enabling users to interact with their Google Calendars directly from the application.
 - **Hosting**: The application is hosted on Netlify, offering a reliable and scalable hosting solution.
 
-### Features
+### User Features
 
 - **Login Page**: This is where a user is able to login/signup either through Google, or with an email and password.
 - **Home Page**: This is where a user is able to see all upcoming events, and are able to click on each event to see more details.
 - **Event Page**: This is where a user is able to sign up to an event, and add an event to their Google Calender if they have signed up.
+
+### Admin Features
+
 - **Admin Page**: This is where an admin is able to create, delete or edit event listings. 
 
 ### Access 
