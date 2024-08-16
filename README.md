@@ -15,7 +15,7 @@ This project is a comprehensive business events platform designed to streamline 
 
 - **Login Page**: This is where a user is able to login/signup either through Google, or with an email and password.
 - **Home Page**: This is where a user is able to see all upcoming events, and are able to click on each event to see more details.
-- **Event Page**: This is where a user is able to sign up to an event, and add an event to their Google Calender if they have signed up.
+- **Event Page**: This is where a user is able to book an event, and add an event to their Google Calender if they have signed up.
 
 ### Admin Features
 
