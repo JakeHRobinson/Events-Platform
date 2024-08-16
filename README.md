@@ -29,9 +29,11 @@ Similarly, local hosting of the project is not feasible as it requires API keys 
 ### Testing
 
 ## Accounts
-- Admin: If you'd like to view the Admin side of the app, you can use the following account. Email - admintest@gmail.com Pass - TestAdmin123
+- Admin: If you'd like to view the Admin side of the app, you can use the following account.
+   Email - admintest@gmail.com Pass - TestAdmin123
   
-- User: If you'd like to view the User side of the app, you can use the following account. Email usertest@gmail.com Pass - TestUser123
+- User: If you'd like to view the User side of the app, you can use the following account.
+   Email usertest@gmail.com Pass - TestUser123
   
 - **Local Hosting**: Local hosting of the project requires multiple API keys, which cannot be distributed publicly.
 
