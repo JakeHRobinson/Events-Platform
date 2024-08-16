@@ -19,7 +19,7 @@ This project is a comprehensive business events platform designed to streamline 
 
 ### Admin Features
 
-- **Admin Page**: This is where an admin is able to create, delete or edit event listings. 
+- **Admin Page**: This is where an admin is able to create, edit or delete event listings. 
 
 ### Access 
 
