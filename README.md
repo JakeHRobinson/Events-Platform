@@ -26,16 +26,14 @@ This project is a comprehensive business events platform designed to streamline 
 - **Email Contact**: For inquiries about the backend or any other issues, please reach out via email at jakehuntlyrobinson@gmail.com.
 - **Project URL**: You can explore the live version of the project at [https://business-events-platform.netlify.app](https://business-events-platform.netlify.app).
 
-### Testing
+## Testing
 
-## Accounts
+### Accounts
 - Admin: If you'd like to view the Admin side of the app, you can use the following account.
 - Email - admintest@gmail.com Pass - TestAdmin123
   
 - User: If you'd like to view the User side of the app, you can use the following account.
 - Email usertest@gmail.com Pass - TestUser123
-  
-- **Local Hosting**: Local hosting of the project requires multiple API keys, which cannot be distributed publicly.
 
 - I appreciate not everyone will want to log in with their own google account. For that reason, I have a short video demonstrating the Google Calendar functionality when signed in with a Google Account here: https://youtu.be/5qpKQjUCDQs
 
